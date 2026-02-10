@@ -18,5 +18,6 @@ public class Usuario extends PanacheEntityBase {
     public Integer id;
     public String nombre;
     public String password;
-    public String rol;
+    public String rol; //rol del usuario, por ejemplo: "admin", "user"
+
 }
