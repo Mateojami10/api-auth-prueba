@@ -3,6 +3,8 @@ package uce.edu.web.api.auth.interfaces;
 import java.time.Instant;
 import java.util.Set;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -19,6 +21,12 @@ public class AuthResource {
     
     @Inject
     UserRepository userRepository;
+    
+    @ConfigProperty(name = "auth.issuer")
+    String issuer;
+    
+    @ConfigProperty(name = "auth.token.ttl")
+    Long ttl;
     
     @GET
     @Path("/token")
@@ -44,13 +52,10 @@ public class AuthResource {
                     .build();
         }
         
-        // Obtener el rol del usuario desde la base de datos (acceso directo, sin getter)
+        // Obtener el rol del usuario desde la base de datos
         String role = usuario.rol;
         
-        // Configuración del token
-        String issuer = "matricula-auth";
-        long ttl = 3600;
- 
+        // Configuración del token desde properties
         Instant now = Instant.now();
         Instant exp = now.plusSeconds(ttl);
  
