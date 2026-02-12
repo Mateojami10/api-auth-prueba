@@ -83,4 +83,12 @@ public class AuthResource {
             this.role = role;
         }
     }
+
+    //insertar usuario de prueba
+    //INSERT INTO usuario (id, nombre, password, rol) 
+    //VALUES (nextval('usuario_secuencia'), 'admin', '123', 'admin');
+    //para buscar
+    //http://localhost:8082/auth/token?user=admin&password=123
+    //http://localhost:8081/consultorio/api/v1.0/citas
+
 }
